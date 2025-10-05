@@ -1,43 +1,36 @@
-// ===== Toggle dark/light mode =====
-function toggleMode() {
-  document.body.classList.toggle("dark");
-}
+ emailjs.init("hWZCzJ010XYwHKKHz");
 
-// ===== Handle form submission via EmailJS =====
-const form = document.getElementById("contact-form");
+    const form = document.getElementById("contact-form");
 
-form.addEventListener("submit", function(event) {
-  event.preventDefault();
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const sendBtn = form.querySelector("button");
+      sendBtn.disabled = true;
+      sendBtn.textContent = "Sending...";
 
-  const sendBtn = form.querySelector("button");
-  sendBtn.disabled = true;
-  sendBtn.textContent = "Sending...";
-
-  // Use sendForm (works directly with form element)
-  emailjs.sendForm("service_vyfe47i", "template_s65tzhi", form)
-    .then(() => {
-      alert("✅ Message sent successfully!");
-      form.reset();
-    })
-    .catch((error) => {
-      console.error("❌ Error sending message:", error);
-      alert("❌ Failed to send message. Please try again later.");
-    })
-    .finally(() => {
-      sendBtn.disabled = false;
-      sendBtn.textContent = "Send Message";
+      emailjs.sendForm("service_vyfe47i", "template_s65tzhi", form)
+        .then((res) => {
+          alert("✅ Message sent successfully!");
+          form.reset();
+        })
+        .catch((err) => {
+          console.error(err);
+          alert("❌ Failed to send message. Please try again later.");
+        })
+        .finally(() => {
+          sendBtn.disabled = false;
+          sendBtn.textContent = "Send Message";
+        });
     });
-});
+      
+     //Mobile Menu Toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const navbar = document.getElementById('navbar');
+    menuBtn.addEventListener('click', () => {
+      navbar.classList.toggle('active');
+    });
 
-// ===== Social Buttons =====
-function openWhatsApp() {
-  window.open("https://wa.me/2347025962295", "_blank");
-}
-
-function openGitHub() {
-  window.open("https://github.com/musendiq21", "_blank");
-}
-
-function openLinkedIn() {
-  window.open("https://www.linkedin.com/in/musendiq-oladimeji", "_blank");
-}
+    // Dark Mode
+    function toggleMode() {
+      document.body.classList.toggle('dark');
+    }
